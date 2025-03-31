@@ -1,0 +1,53 @@
+
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "${NGINX_PORT}:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      - app-network
+
+  php:
+    build:
+      context: ./docker/php
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - app-network
+
+  mariadb:
+    image: mariadb:${MARIADB_VERSION}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "${PMA_PORT}:80"
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - mariadb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mariadb_data:

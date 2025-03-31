@@ -1,0 +1,44 @@
+# Environment variables
+.env
+
+# WordPress core (if installed in src directory)
+src/wp-admin/
+src/wp-includes/
+src/wp-content/plugins/
+src/wp-content/upgrade/
+src/wp-content/uploads/
+src/wp-content/cache/
+
+# WordPress configuration
+src/wp-config.php
+
+# WordPress debug logs
+src/*.log
+
+# Docker volumes
+mariadb_data/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Composer
+vendor/
+composer.lock
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
