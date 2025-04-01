@@ -8,7 +8,7 @@ src/wp-content/plugins/
 src/wp-content/upgrade/
 src/wp-content/uploads/
 src/wp-content/cache/
-
+src/*
 # WordPress configuration
 src/wp-config.php
 
